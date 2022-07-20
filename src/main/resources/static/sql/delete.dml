@@ -1,0 +1,17 @@
+
+
+/* 노드를 삭제할 때 수행하는 과정은 노드를 추가하는 것과 정반대의 과정을 거치면 된다
+
+삭제하려는 노드의 왼쪽 값과 오른쪽 값, 그리고 같은 레벨에 있는 노드의 수를 구해서
+그 사이에 있는 노드를 삭제하고
+lt값과 rt값을 갱신하여준다.
+ */
+
+
+SELECT @myLeft := lt, @myRight := rt, @myWidth := rt - lt + 1
+FROM post WHERE name = '';
+
+DELETE FROM POST WHERE lt BETWEEN @myLeft AND @myRight;
+
+UPDATE post SET rt = rt - @myWidth WHERE rt > @myRight;
+UPDATE post SET lt = lt - @myWidth WHERE lt > @myRight;

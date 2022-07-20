@@ -1,0 +1,11 @@
+
+
+/*
+전체 트리 검색하기
+*/
+
+SELECT node.name
+FROM post AS node, post AS parent
+WHERE node.lt BETWEEN parent.lt AND parent.rt
+    AND parent.name = 'CEO'
+ORDER BY node.lt;
